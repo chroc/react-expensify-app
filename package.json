@@ -9,7 +9,9 @@
     "build:dev": "webpack --mode development",
     "build:prod": "webpack --mode production",
     "dev-server": "npx webpack serve",
-    "test": "jest --config=jest.config.json"
+    "test": "jest --config=jest.config.json",
+    "start": "node server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
@@ -23,6 +25,7 @@
     "css-loader": "^6.7.1",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
+    "express": "^4.18.1",
     "jest": "^28.1.1",
     "live-server": "^1.1.0",
     "mini-css-extract-plugin": "^2.6.1",
