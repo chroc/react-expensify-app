@@ -4,6 +4,7 @@ import moment from 'moment';
 //import 'numeral/locales/en-us'
 import numeral from 'numeral';
 
+// For locals:
 // {numeral.locale('en-gb')}
 // {numeral(amount / 100).format('$0,0.00')}
 
