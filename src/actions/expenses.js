@@ -1,18 +1,27 @@
 import { v1 as uuid }  from 'uuid';
+import db from '../firebase/firebase';
+import {getDatabase, ref, set, remove, update, onValue, push, onChildRemoved, onChildChanged, onChildAdded} from 'firebase/database'
 
 // Action generators:
 
 // Add Expense
-export const addExpense = ({ description = '', note = '', amount = 0, createdAt = 0 } = {}) => ({
+export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
-    expense: {
-        id: uuid(),
-        description,
-        note,
-        amount,
-        createdAt
-    }
+    expense
 });
+
+export const startAddExpense = (expenseData = {}) => {
+    return (dispatch) => {
+        const { description = '', note = '', amount = 0, createdAt = 0 } = expenseData;
+        const expense = {description, note, amount, createdAt};
+        push(ref(db, 'expenses'), expense).then((ref) => {
+            dispatch(addExpense({
+                id: ref.key,
+                ...expense
+            }));
+        });
+    };
+};
 
 // Remove Expense
 export const removeExpense = ({ id } = {}) => ({
