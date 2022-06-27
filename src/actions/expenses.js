@@ -36,11 +36,6 @@ export const startRemoveExpense = ({ id } = {}) => {
         });
     };
 };
-// remove(ref(db, 'isSingle')).then(() => {
-//   console.log('data removed');
-// }).catch(() => {
-//   console.log('Error removing data');
-// });
 
 // Edit Expense
 export const editExpense = (id, updates) => ({
@@ -48,6 +43,14 @@ export const editExpense = (id, updates) => ({
     id,
     updates
 });
+
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        update(ref(db, `expenses/${id}`), updates).then(() => {
+            dispatch(editExpense(id, updates));
+        });
+    };
+};
 
 // Set Expenses
 export const setExpenses = (expenses) => ({

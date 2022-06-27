@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
-import { editExpense, removeExpense, startRemoveExpense } from '../actions/expenses';
+import { editExpense, removeExpense, startRemoveExpense, startEditExpense } from '../actions/expenses';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 // Edit functional component
@@ -15,9 +15,8 @@ const EditExpensePage = (props) => {
     return (
         <div>
             <ExpenseForm expense={props.expense} onSubmit={(expense) => {
-                props.dispatch(editExpense(props.expense.id, expense));
+                props.dispatch(startEditExpense(props.expense.id, expense));
                 navigate('/');
-                // console.log('NEWWW',props);
             }} />
             <button onClick={(e) => {
                 props.dispatch(startRemoveExpense({ id }));
